@@ -1,0 +1,443 @@
+#topMenuTrigger {
+	visibility:hidden;
+}
+
+#topbannerContainer {
+	position:absolute;
+	width:800px;
+	margin:auto;
+	left:0;
+	right:0;
+	height:7em;
+	top:0;
+	left:0;
+	z-index:1000;
+	
+	font-family:sans-serif;
+
+}
+
+#topMenuContainer {
+	position:relative;
+	width:100%;
+	height:90%;
+	top:0%;
+}
+
+.spacerLine {
+	position:relative;
+	width:1px;
+	height:65%;
+	top:17.5%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+	border-style:solid;
+	border-width:0px 2px 0px 0px;
+	border-color:#FCFCFC;
+	
+	background-color:#BBBBBB;
+}
+
+#menuHome {
+	position:relative;
+	height:100%;
+	width:12%;
+	float:left;
+	margin:0em 1em 0em 2em;
+	
+
+}
+
+#menuHomeText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+}
+
+.menuUnderline {
+	position:absolute;
+	width:100%;
+	height:5px;
+	bottom:-5px;
+	
+	background-color:#3366FF;
+	opacity:0;
+}
+
+#menuLearnDiv {
+	position:relative;
+	height:100%;
+	width:6%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuLearnText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+	
+
+#menuCourse1 {
+	position:relative;
+	height:100%;
+	width:10.5%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuCourse1Text {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuCourse2 {
+	position:relative;
+	height:100%;
+	width:12.5%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuCourse2Text {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuCourse3 {
+	position:relative;
+	height:100%;
+	width:15%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuCourse3Text {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuCreateDiv {
+	position:relative;
+	height:100%;
+	width:6%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuCreateText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuDonateDiv {
+	position:relative;
+	height:100%;
+	width:8%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#menuDonateText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#feedbackDiv {
+	position:relative;
+	height:100%;
+	width:10%;
+	float:left;
+	margin:0em 1em 0em 1em;
+	
+
+}
+
+#feedbackText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuSearchDiv {
+	position:relative;
+	height:100%;
+	width:32%;
+	float:left;
+	margin:0em 1.5em 0em 1.5em;
+	
+
+}
+
+#menuSearchContainer {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#searchInput {
+	position:relative;
+	float:left;
+	margin-top:-.15em;
+	width:16em;
+	opacity:.85;
+	
+}
+
+#searchButton {
+	position:relative;
+	float:left;
+	height:1.45em;
+	width:1.6em;
+	margin-top:-.15em;
+	margin-left:.2em;
+	
+	background-color:#BBBBBB;
+	border:1px solid #AAAAAA;
+	border-radius:5px;
+	cursor:pointer;
+	
+	overflow:hidden;
+}
+
+#searchIcon {
+	position:absolute;
+	height:80%;
+	width:70%;
+	left:15%;
+	top:10%;
+}
+
+#menuLoginDiv {
+	position:relative;
+	height:100%;
+	width:6%;
+	float:left;
+	margin:0em 0em 0em 0em;
+	
+
+}
+
+#menuLoginText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+a.menu {
+	display:block;
+	height:100%;
+	color:#BBBBBB;
+}
+
+a:hover {
+	color:#55BBFF;
+}
+
+#feedbackInputBox {
+	position:fixed;
+	width:30em;
+	height:20em;
+	top:8em;
+	right:2em;
+	
+	color:#131313;
+	font-size:1.5em;
+	text-align:center;
+	font-family:sans-serif;
+	
+	background-color:#FFFFFF;
+	visibility:hidden;
+	opacity:0;
+	z-index:499;
+	
+	border-radius:5px;
+	box-shadow: 0px 0px 3px 3px #AAAAAA;
+}
+	
+#feedbackInstructions {
+	position:relative;
+	width:80%;
+	height:auto;
+	margin:1em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+}
+
+#feedbackInput {
+	position:relative;
+	width:80%;
+	height:5em;
+	margin:1em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+}
+
+#submitFeedback {
+	position:relative;
+	margin:1em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	
+	z-index:500;
+}
+
+#cancelFeedback {
+	position:relative;
+	margin:1em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	
+	z-index:500;
+}
+
+#feedbackSuggestions {
+	position:relative;
+	width:80%;
+	height:auto;
+	margin:1em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+}
+
+#thanksForFeedbackBox {
+	position:fixed;
+	width:30em;
+	height:5em;
+	top:12em;
+	right:2em;
+	
+	color:#131313;
+	font-size:1.5em;
+	text-align:center;
+	font-family:sans-serif;
+	
+	background-color:#FFFFFF;
+	visibility:hidden;
+	opacity:0;
+	z-index:498;
+	
+	border-radius:5px;
+	box-shadow: 0px 0px 3px 3px #AAAAAA;
+}
+
+#thanksForFeedback {
+	position:relative;
+	width:80%;
+	height:auto;
+	margin:2em 0em 0em 0em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+}
+
+#submitFeedbackForm {
+}
+
+#formsContainer {
+	position:absolute;
+	width:50%;
+	height:50%;
+	top:25%;
+	left:25%;
+	z-index:-1000000;
+	visibility:hidden;
+}
+
+.horizontalLine {
+	position:relative;
+	width:800px;
+	clear:both;
+	height:5px;
+	background-color:#CCCCCC;
+	opacity:.3;
+}

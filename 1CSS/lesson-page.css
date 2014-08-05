@@ -1,0 +1,636 @@
+body {
+	margin:0;
+	font-size:62.5%;
+	font-family:sans-serif;
+	letter-spacing:1px;
+	
+}
+
+a {
+	color:#3366FF;
+	text-decoration:none;
+}
+
+/*
+div, span {
+	border:1px solid black;
+}
+*/
+
+#background {
+	position:fixed;
+	width:100%;
+	height:100%;
+	background-color:#111122;
+	z-index:-999;
+}
+
+#backgroundTexture {
+	position:absolute;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background-image:url('/1images/texture.png');
+	background-size:1024px 768px;
+	z-index:-995;
+}
+
+#mainContainer {
+	position:absolute;
+	min-width:800px;
+	width:85%;
+	max-width:1000px;
+	min-height:600px;
+	height:85%;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	top:6em;
+	
+	/*border:1px solid black;*/
+	
+	
+}
+
+#pageTitleBox {
+	position:relative;
+	width:20em;
+	height:12.4em;
+	float:right;
+	margin-top:2em;
+	margin-right:1em;
+	z-index:5;
+	
+	background-color:#F2FFD2;
+	color:#000000;
+	font-size:1.5em;
+	
+	border-radius:20px;
+}
+
+#pageTitleBoxHeaderContainer {
+	position:relative;
+	width:100%;
+	height:3em;
+	
+	font-size:1.33em;
+	
+}
+
+#pageTitleBoxHeader {
+	position:absolute;
+	width:100%;
+	height:1em;
+	top:1em;
+	
+	text-align:center;
+}
+
+#pageQuote {
+	position:relative;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	margin:1.5em;
+	margin-top:0em;
+}
+
+#pageLocation {
+	position:relative;
+	width:100%;
+	height:auto;
+	z-index:500;
+	margin-top:.5em;
+	
+	color:#F4F4F4;
+	font-family: Copperplate Gothic Light;
+	font-size:3em;
+	font-weight:500;
+	text-align:center;
+	/*border:1px solid black;*/
+}
+
+.navRightArrow {
+	position:relative;
+	height:.6em;
+	margin-left:.5em;
+	margin-right:.5em;
+}
+
+.dropDownArrow {
+	position:relative;
+	height:.8em;
+	margin-left:.15em;
+	margin-right:.15em;
+	
+	top:.13em;
+}
+
+#locationCourseTitle {
+	cursor:pointer;
+	background-color:rgba(248,248,248,.05);
+}
+
+#locationTopicTitle {
+	position:relative;
+	cursor:pointer;
+	background-color:rgba(248,248,248,.05);
+}
+
+#courseMenu {
+	position:absolute;
+	width:25em;
+	height:15em;
+	left:3em;
+	margin:.5em 0em 0em 0em;
+	z-index:500;
+	visibility:hidden;
+	opacity:0;
+	
+	font-size:1.75em;
+	
+	background-color:#8888FF;
+	border-radius:10px;
+}
+
+#topicMenu {
+	position:absolute;
+	width:25em;
+	height:30em;
+	overflow:auto;
+	right:3em;
+	margin:.5em 0em 0em 0em;
+	z-index:500;
+	visibility:hidden;
+	opacity:0;
+	
+	font-size:1.75em;
+	
+	background-color:#8888FF;
+	border-radius:10px;
+}
+
+.contentContainer {
+	position:relative;
+	left:0;
+	right:0;
+	top:0;
+	height:auto;
+	margin:1em;
+}
+
+.contentContainer table {
+    border-collapse: collapse;
+    border-style: hidden;
+	width:100%
+}
+
+.contentContainer table td {
+	border-width:1px;
+    border-style:solid;
+	border-color:#112;
+	padding:0;
+	
+	text-align:center;
+}
+
+.contentContainer a {
+	height:100%;
+	display:block;
+	padding:.25em;
+	transition:all .15s;
+}
+
+.contentContainer a:link {
+	color:#00;
+}
+
+.contentContainer  a:visited {
+	color:#000;
+}
+
+.contentContainer a:hover {
+	color:#fff;
+	background-color:#111122;
+}
+
+.courseMenuIcon {
+	height:1em;
+}
+
+.nameColumn {
+	width:62%;
+}
+
+.textColumn {
+	width:9.5%;
+}
+
+.videoColumn {
+	width:9.5%;
+}
+
+.practiceColumn {
+	width:9.5%;
+}
+
+.gameColumn {
+	width:9.5%;
+}
+
+.topicMenuSectionHeader {
+	color:#112;
+	margin:2em 0em 1em 0em;
+}
+
+
+	
+
+#mainMaterialContainer {
+	position:relative;
+	width:100%;
+	min-height:20em;
+	height:80%;
+	margin-top:1.5em;
+	
+	/* border-radius:20px; */
+	overflow:hidden;
+	
+	background-color:#E6E6E6;
+	color:#000000;
+	font-size:1.5em;
+	line-height:1.5em;
+}
+
+
+
+#leftPage {
+	position:relative;
+	height:100%;
+	overflow:auto;
+	
+}
+
+#lessonTopNav {
+	position:relative;
+	width:100%;
+	height:2.25em;
+	top:0em;
+	
+	font-size:1em;
+	border-bottom:1px solid rgba(24,46,72,.5);
+}
+
+.previousLesson {
+	position:relative;
+	height:100%;
+	float:left;
+	
+}
+
+.nextLesson {
+	position:relative;
+	height:100%;
+	float:right;
+	
+}
+
+.prevArrow {
+	position:relative;
+	height:100%;
+}
+
+.nextArrow {
+	position:relative;
+	height:100%;
+}
+
+.verticalAlign {
+	position:relative;
+	bottom:.65em;
+}
+
+.centerNavIconHolder {
+	position:absolute;
+	height:100%;
+	width:8.25em;
+	left:0;
+	right:0;
+	margin:auto;
+	
+}
+
+.textIcon {
+	height:75%;
+	float:left;
+	margin:.25em .5em 0em .5em;
+}
+
+.tvIcon {
+	height:75%;
+	float:left;
+	margin:.15em .5em 0em .5em;
+}
+
+.videoIcon {
+	height:75%;
+	float:left;
+	margin:.35em .5em 0em .5em;
+}
+
+.writeIcon {
+	height:75%;
+	float:left;
+	margin:.22em .5em 0em .5em;
+}
+
+#lessonHeader {
+	position:relative;
+	margin:1em 1em 0em 1em;
+	height:auto;
+	
+	font-size:1.5em;
+	text-align:center;
+	
+}
+
+#lessonBody {
+	position:relative;
+	margin:2em 1em 1em 1em;
+	height:auto;
+	
+	font-size:1em;
+	min-height:35em;
+	
+}
+
+#lessonFooter {
+	position:relative;
+	margin:1em 1em .5em 1em;
+	height:auto;
+	
+	font-size:1.5em;
+	text-align:center;
+	
+}
+
+#lessonBottomNav {
+	position:relative;
+	width:100%;
+	height:2.25em;
+	bottom:0em;
+	
+	font-size:1em;
+	
+}
+
+#pageDivider {
+	position:relative;
+	width:1px;
+	height:100%;
+	float:right;
+	
+	background-color:rgba(24,46,72,.5);
+	
+}
+
+#rightPage {
+	position:relative;
+	width:250px;
+	height:auto;
+	float:right;
+	height:100%;
+	background-color:#fff;
+	
+}
+
+#rightPageTabs {
+	position:relative;
+	width:100%;
+	height:2.25em;
+	
+}
+
+
+.tab {
+	position:absolute;
+	width:35%;
+	height:110%;
+	bottom:-10%;
+	background-color:#f8f8f8;
+	
+	display:block;
+	float:left;
+	cursor:pointer;
+	border-style:solid;
+	border-width:1px 1px 0px 1px;
+	border-color:#888;
+	/* border-radius:3px; */
+	z-index:0;
+	
+	text-align:center;
+	
+}
+
+.activeTab {
+	z-index:5;
+	background-color:#fff;
+}
+
+#rightPageContents {
+	position:relative;
+	width:100%;
+	
+	border-style:solid;
+	border-width:1px 0 0 0;
+	border-color:#aaa;
+	background-color:#fff;
+}
+
+#rightPageBody {
+	position:relative;
+	margin:1em 1em 1em 1em;
+	height:auto;
+	
+	
+	font-size:1em;
+}
+
+#informationHeader {
+	left:0;
+}
+
+#informationContainer {
+	position:relative;
+	height:auto;
+	margin:1em 0em 2.5em 0em;
+	
+	font-size:1em;
+}
+
+.floatLeftHalf {
+	position:relative;
+	width:50%;
+	height:auto;
+	float:left;
+}
+
+.floatRightHalf {
+	position:relative;
+	width:50%;
+	height:auto;
+	float:right;
+	text-align:right;
+}
+
+.icon {
+	height:1em;
+}
+
+.iconSideMargins	{
+	height:1em;
+	margin:0em 0em 0em 1em;
+	cursor:pointer;
+}
+
+#likesSpan {
+	width:100%;
+	text-align:center;
+	clear:both;
+	
+	display:inline-block;
+}
+
+#userJudgements {
+	position:relative;
+	width:100%;
+	font-size:1.25em;
+	margin-top:.5em;
+	padding:1em 0em;
+	
+	border-width:2px 0px 2px 0px;
+	border-style:solid;
+	border-color:rgba(24,46,72,.5);
+}
+
+#preferencesHeader {
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+#preferencesContainer {
+	position:relative;
+	width:100%;
+	
+	margin:1em 0em 2.5em 0em;
+}
+
+.preferenceContainer {
+	position:relative;
+	width:100%;
+	height:6.5em;
+	/*
+	border:1px solid black;
+	*/
+	margin-top:1.5em;
+}
+
+.preferenceHeader {
+	position:relative;
+	width:100%;
+	margin-top:.5em;
+	font-size:1.25em;
+	text-align:center;
+}
+
+.preferenceMinLabel {
+	position:relative;
+	width:35%;
+	float:left;
+	margin-top:0em;
+	font-size:1em;
+	text-align:center;
+}
+
+.preferenceMaxLabel {
+	position:relative;
+	width:33%;
+	float:right;
+	margin-top:0em;
+	font-size:1em;
+	text-align:center;
+}
+
+.sliderContainer {
+	position:relative;
+	width:70%;
+	height:2em;
+	margin:0em 0em 0em 15%;
+	clear:both;
+}
+	
+
+.slider {
+	position:absolute;
+	width:100%;
+	height:100%;
+	/*-webkit-appearance: slider-vertical; /*Chrome*/
+	writing-mode: bt-lr; /*for IE*/*/
+}
+
+.sliderDisplay {
+	position:absolute;
+	left:.5em;
+	top:.5em;
+	
+	font-size:1.25em;
+}
+	
+
+#loginButton {
+	width:7em;
+	float:left;
+}
+
+#newAccountButton {
+	width:11em;
+	float:right;
+}
+
+#toolsHeader {
+	right:0;
+}
+
+#toolsContainer {
+	position:relative;
+	width:100%;
+	
+	margin:1em 0em 2.5em 0em;
+}
+
+#detailsFooter {
+	position:relative;
+	margin:.5em 1em .5em 1em;
+	height:auto;
+	padding:.5em 0em 0em 0em;
+	border-width:2px 0px 0px 0px;
+	border-style:solid;
+	border-color:rgba(24,46,72,.5);
+	
+	
+	font-size:1.5em;
+	text-align:center;
+	
+}
+
+.hideContents {
+	display:none;
+}
+
+.displayContents {
+	display:block;
+}

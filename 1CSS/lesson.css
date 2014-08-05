@@ -1,0 +1,134 @@
+.imageContainerRight {
+	position:relative;
+	width:40%;
+	float:right;
+	margin:0 0 0 1em;
+	padding:.75em;
+	border:1px solid #aaa;
+}
+
+.imageBoxImageRight {
+	width:100%;
+}
+
+.imageCaption {
+	width:100%;
+	text-align:center;
+	font-size:.8em;
+}
+
+.imageContainerCenter {
+	position:relative;
+	width:100%;
+}
+
+.imageBoxImageCenter {
+	display:table-row;
+	width:75%;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+.triggerText {
+	cursor:pointer;
+	font-weight:700;
+	/* -webkit-font-smoothing: antialiased; */
+	color:#339;
+}
+
+/* .triggerText:hover {
+	background-color:#333;
+	color:#eaeaea;
+} */
+
+.triggerTextActive {
+	background-color:rgba(70,35,70,.1);
+	border:1px solid #339;
+	padding:.5em;
+}
+
+.hiddenTextBox {
+	/* visibility:hidden; */
+	display:none;
+}
+
+.hiddenTextBoxRevealed {
+	display:block;
+	padding:.5em;
+	clear:both;
+	border-radius:10px;
+	margin:.5em;
+	background-color:rgba(0,0,0,.02);
+	box-shadow:0 0 10px 0 #000 inset;
+}
+
+.videoContainer {
+	position:relative;
+	width:100%;
+	height:270px;
+}
+
+.embeddedVideo {
+	position:absolute;
+	width:420px;
+	height:270px;
+	margin:auto;
+	left:0;
+	right:0;
+}
+
+.videoCaption {
+	width:100%;
+	text-align:center;
+	font-size:.8em;
+	margin:1em 0em 1em 0em;
+}
+
+.multipleChoiceAnswer {
+	display:block;
+}
+
+.multipleChoiceAnswerResultDisplay {
+	display:block;
+	visibility:hidden;
+	margin:1em 0em 1em 0em;
+	text-align:center;
+	font-size:1.2em;
+	letter-spacing: 2px;
+	padding:.25em;
+	color:#fff;
+}
+
+.multipleChoiceDisplayCorrect {
+	visibility:visible;
+	background-color:#090;
+}
+
+.multipleChoiceDisplayIncorrect {
+	visibility:visible;
+	color:#222;
+	background-color:#666;
+}
+
+.freeResponseResult {
+	display:block;
+	visibility:hidden;
+	margin:1em 0em 1em 0em;
+	text-align:center;
+	font-size:1.2em;
+	letter-spacing: 2px;
+	padding:.25em;
+	color:#fff;
+}
+
+.freeResponseDisplayCorrect {
+	visibility:visible;
+	background-color:#090;
+}
+
+.freeResponseDisplayIncorrect {
+	visibility:visible;
+	color:#222;
+	background-color:#666;
+}

@@ -1,0 +1,984 @@
+body {
+	margin:0;
+	font-size:62.5%;
+	font-family:sans-serif;
+	letter-spacing:1px;
+	
+}
+
+a:link, a:visited {
+	color:#3366FF;
+	text-decoration:none;
+}
+
+#background {
+	position:fixed;
+	width:100%;
+	height:100%;
+	background-color:#111122;
+	z-index:-999;
+}
+
+#backgroundTexture {
+	position:absolute;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background-image:url('/1images/texture.png');
+	background-size:1024px 768px;
+	z-index:-995;
+}
+
+#mainContainer {
+	position:absolute;
+	display:table;
+	min-width:800px;
+	width:80%;
+	max-width:950px;
+	min-height:525px;
+	height:80%;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	top:7em;
+	
+	text-align:center;
+	
+	/*border:1px solid black;*/
+	
+	
+}
+
+#topBanner {
+	position:relative;
+	width:100%;
+	height:1.67em;
+	top:0em;
+	font-size:3em;
+	border:1px solid black;
+}
+
+.horizontalLine {
+	position:relative;
+	width:800px;
+	clear:both;
+	height:5px;
+	background-color:#CCCCCC;
+	opacity:.3;
+}
+
+.verticalLine {
+	position:relative;
+	height:40em;
+	float:left;
+	width:5px;
+	background-color:#CCCCCC;
+	opacity:.3;
+}
+
+#pageName {
+	position:relative;
+	height:1em;
+	z-index:10;
+	margin-top:.2em;
+	float:left;
+	
+	color:#F4F4F4;
+	font-family: Copperplate Gothic Light, Copperplate;
+	font-size:1em;
+	font-weight:500;
+	/*border:1px solid black;*/
+}
+
+#pageDescriptionSentence {
+	position:relative;
+	width:100%;
+	height:1.5em;
+	z-index:10;
+	margin-top:1.25em;
+	
+	color:#F4F4F4;
+	font-size:2em;
+	font-weight:500;
+	text-align:center;
+	/*border:1px solid black;*/
+}
+
+#previewLesson {
+	position:relative;
+	float:right;
+	/* height:1em; */
+	z-index:10;
+	margin-top:1em;
+}
+
+#loginAndTools {
+	position:relative;
+	display:table;
+	width:33%; /*33%*/
+	height:85%;
+	float:left;
+	margin:0 1.5% 0 0%;/* 
+	border-collapse:collapse; */
+	transition:opacity .1s;
+}
+
+#loginBoxContainer {
+	position:relative;
+	width:100%;
+	/* height:100%; */
+	border:2px outset #666;
+	margin:0 0 3.5% 0;
+	background-color:#444;/* 243655 */
+	color:#ccc;
+	font-size:1.3em;
+	border-radius:0px;
+	line-height:1.3em;
+}
+	
+
+#loginBox {
+	position:relative;
+	margin:1em 1em 0em 1em;
+}
+
+#username {
+	font-size:1.25em;
+	width:100%;
+	margin-bottom:.25em;
+	
+	font-family:Copperplate Gothic Light;
+}
+
+#usernameInput {
+	margin:.3em;
+	padding:.2em;
+	border-style:inset;
+	border-color:#888;
+	background-color:#112;
+	color:#ccc;
+}
+
+#passwordInput {
+	margin:.3em;
+	padding:.2em;
+	border-style:inset;
+	border-color:#888;/* 6ac */
+	background-color:#112;
+	color:#ccc;
+}
+
+#loginButton {
+	width:5em;/* 
+	float:left; */
+	background-color:#aaa;
+	cursor:pointer;
+}
+
+#newAccountButton {
+	width:8em;/* 
+	float:right; */
+	background-color:#aaa;
+	cursor:pointer;
+}
+
+#toolContainer {
+	position:relative;
+	width:100%;
+	height:100%;
+	display:table-row;
+	/* top:35.75%; */
+	margin:3.5% 0em 0em 0em;
+	background-color:#444;/* 243655 */
+	color:#ccc;
+	font-size:1.3em;
+	border-radius:0px;
+	line-height:1.3em;
+}
+
+#toolContainerCell {
+	position:relative;
+	display:table-cell;
+	border:2px outset #666;
+}
+
+#toolBox {
+	position:relative;
+	margin:1em 1em 1em 1em;
+}
+
+#toolHeader {
+	position:relative;
+	width:100%;
+	font-size:1.25em;
+	font-family: Copperplate Gothic Light;
+}
+
+.toolIconRow {
+	position:relative;
+	width:100%;
+	height:3em;
+	margin:1em 0 0 0;
+	border-width:0 0 1px 0;
+	border-style:solid;
+	border-color:#888;
+}
+
+#trashBox {
+	position:absolute;
+	min-height:5em;
+	background-color:#cccccc;
+	overflow-x:hidden;
+	overflow-y:auto;
+	top:.8em;
+	right:.6em;
+	bottom:6em;
+	left:.6em;
+	padding:0 0 2.5em 0;
+	visibility:hidden;
+	border-radius:5px;
+	box-shadow:0px 0px 5px #000000;
+	text-align:left;
+}
+
+#footerIconBox {
+	position:absolute;
+	bottom:1em;
+	left:1em;
+	right:1em;
+}
+
+.footerIconRow {
+	position:absolute;
+	width:100%;
+	height:3em;
+	bottom:0em;
+	border-width:0px 0 0px 0;
+	border-style:solid;
+	border-color:#888;
+}
+
+.icon {
+	position:relative;
+	float:left;
+	width:2em;
+	height:2em;
+	margin:0em 0 0 1.33em;
+	border-radius:5px;
+	overflow:hidden;
+	box-shadow:0px 0px 5px #000000;
+	cursor:pointer;
+	background-color:#ffffff;
+}
+
+.iconImage {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0%;
+	left:0%;
+}
+
+#insertTextBox {
+}
+
+#insertTextBoxIcon {
+}
+
+#insertEquation {
+}
+
+#insertEquationIcon {
+	width:120%;
+	height:120%;
+	left:-10%;
+	top:-10%;
+}
+
+#editingSpace {
+	position:relative;/* 
+	width:65%; */
+	/* min-height:500px;
+	height:80%; */
+	top:0;
+	bottom:0;
+	height:85%;/*
+	float:right; */
+	overflow:auto;
+	
+	border:2px outset #666;
+	background-color:#444;
+	/* 
+	background-color:#243655; *//*aaa*/
+	border-radius:0px;
+	font-size:1.5em;
+	text-align:left;
+}
+
+.textBox {
+	position:relative;
+	min-height:5em;
+	background-color:#000000;/* 72a4FF */
+	color:#778;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin:.8em .6em 1em .6em;
+	padding:0 0 2.5em 0;
+	border-radius:2px;
+	box-shadow:0px 0px 2px #000000;
+}
+
+.textBoxGray {
+	position:relative;
+	min-height:5em;
+	background-color:#000000;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin:.8em .6em 1em .6em;
+	padding:0 0 2.5em 0;
+	border-radius:2px;
+	box-shadow:0px 0px 2px #000000;
+}
+
+.grayControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#2a2a2a;
+	box-shadow:0px 0px 1px #112;
+}
+
+.blueControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#2a2a2a;/* bbf 224 */
+	box-shadow:0px 0px 1px #112;
+}
+
+.purpleControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#424;
+	box-shadow:0px 0px 1px #112;
+}
+
+.greenControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#242;
+	box-shadow:0px 0px 5px #112;
+}
+
+.textBoxTitle {
+	position:absolute;
+	width:100%;
+	left:0;
+	margin:.5em 0 0 0;
+	color:#aaa;
+	text-align:center;
+	font-family: Copperplate Gothic Light;
+}
+
+.navIconLeft {
+	position:relative;
+	float:left;
+	width:1.5em;
+	height:1.5em;
+	margin:.25em 0em .25em .5em;
+	border-radius:5px;
+	overflow:hidden;
+	cursor:pointer;
+	z-index:100;
+}
+
+.navIconRight {
+	position:relative;
+	float:right;
+	width:1.5em;
+	height:1.5em;
+	margin:.25em .5em .25em 0em;
+	border-radius:5px;
+	overflow:hidden;
+	cursor:pointer;
+	z-index:100;
+}
+
+.inlineIconRight {
+	position:relative;
+	float:right;
+	height:1.25em;
+	width:1.25em;
+	margin:0em 0em 0em .3em;
+	border-radius:3px;
+	overflow:hidden;
+	cursor:pointer;
+}
+
+.textField {
+	position:relative;
+	min-height:5em;
+	margin:.75em .5em 0 .5em;
+	/*border:1px solid #000000;*/
+}
+
+.triggerBox {
+	display:inline-block;
+	position:relative;
+	min-width:4em;
+	min-height:1.3em;
+	margin:0em .2em;
+	padding:0.1em 0.25em .1em .25em;
+	vertical-align:middle;
+	border-radius:5px;
+	background-color:#aa55aa;
+	box-shadow:0px 0px 3px #000000;
+}
+
+.triggerBoxHighlighted {
+	box-shadow:0px 0px 5px 5px #424;
+}
+
+.triggerTextEditor {
+	display:inline-block;
+	position:relative;
+	min-width:6em;
+	height:1.3em;
+	padding:0em .2em;
+	background-color:#ffffff;
+}
+
+.hiddenTextBoxEditorHighlighted {
+	box-shadow:0px 0px 10px 5px #aa55aa;
+}
+
+.videoBox {
+	position:relative;
+	min-height:5em;
+	background-color:#b5b5b5;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin:.8em .6em 1em .6em;
+	padding:0 0 2.5em 0;
+	border-radius:5px;
+	box-shadow:0px 0px 5px #000000;
+}
+
+.imageBox {
+	position:relative;
+	min-height:5em;
+	background-color:#ffffff;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	margin:.8em .6em 1em .6em;
+	padding:0 0 2.5em 0;
+	border-radius:5px;
+	box-shadow:0px 0px 5px #000000;
+}
+
+.videoControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#660810;
+	box-shadow:0px 0px 5px #112;
+}
+
+.imageControlBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#ee6608;
+	box-shadow:0px 0px 5px #112;
+}
+
+.videoBoxInnerContainer {
+	position:relative;
+	min-height:5em;
+	margin:.75em .5em 0 .5em;
+	/*border:1px solid #000000;*/
+}
+
+.imageBoxInnerContainer {/*same as video box*/
+	position:relative;
+	min-height:5em;
+	margin:.75em .5em 0 .5em;
+	/*border:1px solid #000000;*/
+}
+
+.linkTriggerBox {
+	display:inline-block;
+	position:relative;
+	min-width:2em;
+	height:1.3em;
+	margin:0em .2em;
+	padding:0.1em 0.0em .1em .25em;
+	vertical-align:middle;
+	border-radius:5px;
+	background-color:#0088ff;
+	box-shadow:0px 0px 3px #000000;
+}
+
+.linkTriggerText {
+	display:inline-block;
+	position:relative;
+	min-width:2em;
+	height:1.3em;
+	padding:0em .2em;
+	background-color:#ffffff;
+}
+
+.linkBox {
+	position:absolute;
+	display:inline-block;
+	height:auto;
+	min-width:2em;
+	min-height:1em;
+	margin:2em 0 0 -.5em;
+	padding:0em;
+	z-index:1000;
+	border-radius:5px;
+	visibility:hidden;
+	background-color:#ffffff;
+	box-shadow:0px 0px 7px #000000;
+	text-align:center;
+}
+
+/* .linkText {
+	position:relative;
+	height:1em;
+	margin:0 0em 0em 0em;
+} */
+
+.titleTriggerBox {
+	display:inline-block;
+	position:relative;
+	min-width:2em;
+	height:1.3em;
+	margin:0em .2em;
+	padding:0.1em 0.0em .1em .25em;
+	vertical-align:middle;
+	border-radius:5px;
+	background-color:#44cc44;
+	box-shadow:0px 0px 3px #000000;
+}
+
+.titleTriggerText {
+	display:inline-block;
+	position:relative;
+	min-width:2em;
+	height:1.3em;
+	padding:0em .2em;
+	background-color:#ffffff;
+}
+
+.titleBox {
+	position:absolute;
+	display:inline-block;
+	height:auto;
+	min-width:2em;
+	min-height:1em;
+	margin:2em 0 0 -.5em;
+	padding:0em;
+	z-index:1000;
+	border-radius:5px;
+	visibility:hidden;
+	background-color:#ffffff;
+	box-shadow:0px 0px 7px #000000;
+	text-align:center;
+}
+
+/* .titleText {
+	position:relative;
+	height:1em;
+	margin:0 0em 0em 0em;
+} */
+
+.equationTriggerBox {
+	display:inline-block;
+	position:relative;
+	height:1.3em;
+	box-shadow:0px 0px 3px #000000;
+	border-radius:5px;
+	background-color:#ff1111;
+	vertical-align:middle;
+	margin:0em .2em;
+	padding:0.1em 0.0em .1em .25em;
+}
+
+.equationInput {
+	position:relative;
+	height:1.3em;
+	margin:0 0em 0em 0em;
+	border-width:0;
+}
+
+.equationPreviewBox {
+	position:absolute;
+	display:inline-block;
+	height:auto;
+	min-width:2em;
+	min-height:1em;
+	margin:2em 0 0 -.15em;
+	padding:.25em;
+	z-index:1000;
+	border-radius:5px;
+	visibility:hidden;
+	background-color:#ffffff;
+	box-shadow:0px 0px 7px #000000;
+	text-align:center;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+.importantEquationCheckbox {
+	margin:0em 0em 0em 1.25em;
+	width:1em;
+	height:1em;
+	cursor:pointer;
+}
+	
+
+.mainButton {
+	position:absolute;
+	height:2.5em;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0em;
+	overflow:hidden;
+	
+	background-color:#44BB33;
+	border-radius:20px;
+	z-index:10;
+}
+
+.buttonText {
+	position:absolute;
+	width:100%;
+	height:50%;
+	top:18%;
+	color:#183348;
+	font-size:1.25em;
+	font-weight:500;
+	text-align:center;
+	z-index:300;
+}
+
+.embeddedVideoContainerEditor {
+	position:relative;
+	width:100%;
+	height:197px;
+}
+
+.embeddedVideoEditor {
+	position:absolute;
+	width:350px;
+	height:100%;
+	margin:auto;
+	left:0;
+	right:0;
+}
+
+.videoUrlInputsContainer {
+	position:relative;
+	width:100%;
+	text-align:center;
+	margin:1em 0 0 0;
+}
+
+.videoUrlInput {
+	width:26em;
+}
+
+.videoUrlButton {
+	width:8em;
+}
+
+.videoStartTimeInput {
+	width:5em;
+	text-align:center;
+}
+
+.videoEndTimeInput {
+	width:5em;
+	text-align:center;
+}
+
+.imageForm {
+	/* position:absolute;
+	width:100%;
+	height:100%;
+	top:0%;
+	left:0%; */
+}
+
+.imageContainerEditor {
+	position:relative; /*I have no idea why this would make it visible over the upload image box...*/
+	height:31em;
+	width:50%;
+	float:right;
+	border:1px solid #888888;
+	overflow:hidden;
+	line-height:1.35em;
+	font-size:.5em;
+}
+
+.previewImageEditor {
+	position:relative; /* I have no idea why this would make it visible over the upload image box... */
+	width:50%;
+	height:40%;
+	float:right;
+	border:1px solid #888888;
+}
+
+.previewImageEditorCentered {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+.imageOptionsContainer {
+	/*position:relative; I have no idea why this would make it visible over the upload image box...*/
+	width:49%;
+	float:left;
+	text-align:center;
+	height:100%;
+}
+
+
+.imagePlaceOptions {
+	/*position:relative; I have no idea why this would make it visible over the upload image box...*/
+	clear:both;
+	width:100%;
+	text-align:center;
+}
+
+.imageCaptionInput {
+	/*position:relative; I have no idea why this would make it visible over the upload image box...*/
+	width:90%;
+}
+
+
+.imageUploadBox {
+	position:absolute;
+	width:66%;
+	height:100%;
+	left:2.5%;
+	top:0%;
+	background-color:#eee;
+	visibility:hidden;
+	border-radius:10px;
+	box-shadow:0px 0px 3px #000000;
+	text-align:center;
+	overflow-x:auto;
+	overflow-y:hidden;
+}
+
+.imageUploadCloseBar {
+	position:absolute;
+	width:100%;
+	height:2em;
+	top:0;
+}
+
+.imageUploadCloseBoxButton {
+	position:absolute;
+	right:.33em;
+	top:.25em;
+	width:1.5em;
+	height:1.5em;
+	background-image:url('/1images/closeIcon.png');
+	background-size: 100% 100%;
+	border-radius:5px;
+	cursor:pointer;
+}
+	
+
+.imageUploadBoxContents {
+	position:absolute;
+	top:2em;
+	left:1em;
+	right:1em;
+	bottom:1em;
+}
+
+.chooseFileButton {
+	position:relative;
+}
+
+.uploadFileButton {
+}
+
+.imageUploadOr {
+}
+
+.pasteImageURL {
+	width:100%;
+}
+
+.saveFileFromURL {
+}
+
+.uploadGraphExplanation {
+}
+
+.multipleChoiceAddOption {
+	position:relative;
+	clear:both;
+	float:left;
+	width:2em;
+	height:2em;
+	border-radius:5px;
+	background-color:#fff;
+	cursor:pointer;
+}
+
+.multipleChoiceOptionContainer{
+	position:relative;
+	clear:both;
+	width:100%;
+	min-height:3em;
+	border:1px solid black;
+}
+
+.multipleChoiceRadioContainerEditor{
+	position:relative;
+	float:left;
+	width:10%;
+	height:2.5em;
+	border:1px solid black;
+}
+
+.multipleChoiceRadioEditor{
+	
+}
+
+.multipleChoiceLabelContainer{
+	position:relative;
+	float:left;
+	width:10%;
+	height:2.5em;
+	border:1px solid black;
+}
+
+.multipleChoiceLable{
+	position:absolute;
+	margin:auto;
+	left:0;
+	right:0;
+	text-align:center;
+	font-size:1.25em;
+	font-weight:bold;
+}
+
+.multipleChoiceAnswerEditor{
+	position:relative;
+	float:right;
+	width:75%;
+	min-height:1.5em;
+	background-color:#ccc;
+}
+
+.multipleChoiceAnswer {
+	display:inline-block;
+	width:100%;
+	border:1px solid #aff;
+}
+
+.freeResponseAddVariable {
+	position:relative;
+	clear:both;
+	float:left;
+	width:2em;
+	height:2em;
+	border-radius:5px;
+	background-color:#fff;
+	cursor:pointer;
+}
+
+.variableRangeContainer {
+	position:relative;
+	width:100%;
+}
+
+.freeResponseAnswerContainerEditor {
+	display:inline-block;
+	position:relative;
+	width:100%;
+	margin:1em 0em 0em 0em;
+	text-align:center;
+}
+
+#lessonPreviewBox {
+	position:fixed;
+	height:80%;
+	width:600px;
+	top:7em;
+	left:0;
+	right:0;
+	margin:auto;
+	z-index:999;
+	visibility:hidden;
+	background-color:#eaeaea;
+	color:#ddd;
+	border-radius:20px;
+	box-shadow:0px 5px 10px #000000;
+	overflow-x:hidden;
+	overflow-y:auto;
+	font-size:1.5em;
+	
+}
+
+#lessonPreviewOptionsBar {
+	position:relative;
+	width:100%;
+	height:2em;
+	background-color:#126;
+}
+
+#closeLessonPreview {
+	position:relative;
+	float:right;
+	height:1.75em;
+	width:1.75em;
+	margin:.125em .5em;
+	cursor:pointer;
+	background-image:url('/1images/closeIcon.png');
+	background-size:100% 100%;
+	border-radius:5px;
+}
+
+#lessonPreviewBody {
+	position:relative;
+	min-height:5em;
+	margin:1em;
+	text-align:left;
+	color:#444;
+	/* background-color:#222222; */
+}
+
+.boxedEquation {
+	display:inline-block;
+	width:100%;
+	text-align:center;
+	border:3px solid #ff2222;
+}
+
+.clearBothElement {
+	clear:both;
+}
+
+.visibleElement {
+	visibility:visible !important;
+}
+
+.hiddenElement {
+	visibility:hidden !important;
+}
+	
+	
