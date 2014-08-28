@@ -5,6 +5,7 @@
 	margin:0 0 0 1em;
 	padding:.75em;
 	border:1px solid #aaa;
+	text-align:center;
 }
 
 .imageBoxImageRight {
@@ -13,13 +14,14 @@
 
 .imageCaption {
 	width:100%;
-	text-align:center;
 	font-size:.8em;
 }
 
 .imageContainerCenter {
 	position:relative;
 	width:100%;
+	text-align:center;
+	padding:.75em;
 }
 
 .imageBoxImageCenter {
@@ -27,7 +29,7 @@
 	width:75%;
 	left:0;
 	right:0;
-	margin:auto;
+	margin: 1em auto 1em auto;
 }
 
 .triggerText {

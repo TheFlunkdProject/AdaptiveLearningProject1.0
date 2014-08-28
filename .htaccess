@@ -1,0 +1,20 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !/$1/$1$2
+RewriteRule   ^learn/bb/horses.htm/(.[^/]*)/(.*)$   /aa/Xu8JuefAtua.htm?stuff=$1 [L]
+
+
+
+
+#RewriteCond %{HTTP_HOST} switchlearn.com$ [NC]
+#RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|robots\.txt)$ [NC]
+RewriteRule  ^learn/courses/(.[^/]*)/(.[^/a-z]*)/?$  /learn/lesson.php?course=$2
+
+#RewriteCond %{HTTP_HOST} switchlearn.com$ [NC]
+#RewriteCond %{HTTP_HOST} !/$1/$1$2
+RewriteRule  ^learn/courses/(.[^/]*)/(.[^/a-z]*)/(.[^/]*)/(.[^/a-z]*)/lesson/?$  /learn/lesson.php?course=$2&topic=$4
+
+#RewriteCond %{HTTP_HOST} switchlearn.com$ [NC]
+#RewriteCond %{HTTP_HOST} !/$1/$1$2
+RewriteRule  ^learn/courses/(.[^/]*)/(.[^/a-z]*)/(.[^/]*)/(.[^/a-z]*)/lesson/(.[^/a-z]*)/?$  /learn/lesson.php?course=$2&topic=$4&lesson=$5 [L]

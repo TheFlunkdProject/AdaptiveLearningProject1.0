@@ -1,0 +1,1 @@
+[18-Aug-2014 14:30:04] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/learnfla/public_html/switchlearn.com/ROOT/login/index.php:14) in /home/learnfla/public_html/switchlearn.com/ROOT/login/index.php on line 97

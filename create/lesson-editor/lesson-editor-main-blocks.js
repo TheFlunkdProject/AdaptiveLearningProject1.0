@@ -4,10 +4,14 @@ function insertMainBox(boxType) {
 	
 	var mainBox = createEl('div',['className',' textBox','contentEditable','false','id',boxType+istr])
 	var controlBar = createControlBar(boxType,istr);
-	var mainBoxBody = createMainBoxBody(boxType,istr);
+	var mainBoxBodyElements = createMainBoxBody(boxType,istr);
+	var mainBoxBody = mainBoxBodyElements[0];
+	var mainBoxTextarea = mainBoxBodyElements[1];
 
-	appendChildren(mainBox,[controlBar,mainBoxBody]);
+	appendChildren(mainBox,[controlBar,mainBoxBody,mainBoxTextarea]);
 	gEBI('editingSpace').appendChild(mainBox);
+	applyJS.mainBox(boxType, istr);
+	
 	if (boxType=='textBox') mainBoxBody.focus();
 }
 
@@ -26,52 +30,50 @@ function findMainBoxNumber() {
 
 
 function createControlBar(boxType,istr) {
-	var className = '';
-	switch(boxType) {
-		case 'textBox':
-			className = ' blueControlBar';
-			break;
-		case 'hiddenTextBoxEditor':
-			className = ' purpleControlBar';
-			break;
-		case 'multipleChoiceBox':
-			className = ' greenControlBar';
-			break;
-		case 'freeResponseBox':
-			className = 'greenControlBar';
-			break;
-	}
+	var classname = getMainBoxClassName(boxType);
+	
 	// Main bar:
-	var div1 = createEl('div',['className',className,'contentEditable','false','id','controlBar'+istr]);
+	var div1 = createEl('div',['className',classname,'contentEditable','false','id','controlBar'+istr]);
 	
 	//icons for navigation:
 	var div2 = createEl('div',['className',' navIconLeft','id','iconDown'+istr]);
-	div2.onclick=function() {divDown(istr,boxType)};
-	var img1 = createEl('img',['className',' iconImage','src','/1images/downArrowIcon2.png','id','downArrowIcon'+istr]);
+	var img2 = createEl('img',['className',' iconImage','src','/1images/downArrowIcon2.png','id','downArrowIcon'+istr]);
+	
 	var div3 = createEl('div',['className',' navIconLeft','id','iconUp'+istr]);
-	div3.onclick=function() {divUp(istr,boxType);};
-	var img2 = createEl('img',['className',' iconImage','src','/1images/upArrowIcon2.png','id','upArrowIcon'+istr]);
-	var div4 = createEl('div',['className',' navIconRight','id','iconTrash'+istr]);
-	switch(boxType) {
-		case 'textBox':
-			div4.onclick=function() {closeBox(istr,boxType);};
-			break;
-		case 'hiddenTextBoxEditor':
-			div4.onclick=function() {closeHiddenBox(istr);};
-			break;
-		case 'multipleChoiceBox':
-			div4.onclick=function() {closeBox(istr,boxType);};
-			break;
-		case 'freeResponseBox':
-			div4.onclick=function() {closeBox(istr,boxType);};
-		break;
-	}
-	var img3 = createEl('img',['className',' iconImage','src',"/1images/trashIcon.png",'id','trashIcon'+istr]);
+	var img3 = createEl('img',['className',' iconImage','src','/1images/upArrowIcon2.png','id','upArrowIcon'+istr]);
+	
+	var div4 = createEl('div',['className',' navIconLeft','id','iconHtmlTag'+istr]);
+	var img4 = createEl('img',['className',' iconImage','src','/1images/html-tags3.png','id','htmlTagIcon'+istr]);
+	
+	var div5 = createEl('div',['className',' navIconRight','id','iconTrash'+istr]);
+	var img5 = createEl('img',['className',' iconImage','src',"/1images/trashIcon.png",'id','trashIcon'+istr]);
+	
+	
 	
 	// Assemble:
-	appendNextElementsInList([div2,img1, div3,img2, div4,img3, div1,[div2,div3,div4]]);
+	appendNextElementsInList([div2,img2, div3,img3, div4,img4, div5,img5, div1,[div2,div3,div4,div5]]);
 	
 	return div1;
+}
+
+
+function getMainBoxClassName(boxType) {
+	var classname = '';
+	switch(boxType) {
+		case 'textBox':
+			classname = ' blueControlBar';
+			break;
+		case 'hiddenTextBoxEditor':
+			classname = ' purpleControlBar';
+			break;
+		case 'multipleChoiceBox':
+			classname = ' greenControlBar';
+			break;
+		case 'freeResponseBox':
+			classname = 'greenControlBar';
+			break;
+	}
+	return classname;
 }
 
 
@@ -91,7 +93,9 @@ function createMainBoxBody(boxType,istr) {
 			div = createFreeResponseBoxBody(istr);
 			break;
 	}
-	return div;
+	var textarea1 = createEl('textarea',['className','htmlTextarea squishedElement','id','htmlTextarea'+istr]);
+	var arr = [div, textarea1];
+	return arr;
 }
 
 
@@ -103,13 +107,7 @@ function createTextBoxBody(istr) {
 
 function createHiddenTextBoxBody(istr) {
 	var div = createEl('div',['className',' textField newLineEditable','id','textField'+istr,'contentEditable','true']);
-	div.onfocus=function() {
-		gEBI('triggerBox'+istr).className += ' triggerBoxHighlighted';
-	};
-	div.onblur=function() {
-		var classname = gEBI('triggerBox'+istr).className;
-		gEBI('triggerBox'+istr).className = replaceAllInstancesOf(classname, ' triggerBoxHighlighted','');
-	};
+	
 	return div;
 }
 
@@ -117,7 +115,6 @@ function createMultipleChoiceBoxBody(istr) {
 	var textField = createEl('div',['className',' textField','id','textField'+istr,'contentEditable','false']);
 	
 	var addButton = createEl('div',['className',' multipleChoiceAddOption','id','multipleChoice'+istr+'AddOption'+'1']);
-	addButton.onclick = function() {addOption(istr,textField,addButton);};
 	
 	appendNextElementsInList([textField,addButton]);
 	addOption(istr,textField,addButton);
@@ -160,7 +157,6 @@ function createFreeResponseBoxBody(istr) {
 	var textField = createEl('div',['className',' textField','id','textField'+istr,'contentEditable','false']);
 	
 	var addButton = createEl('div',['className',' freeResponseAddVariable','id','freeResponse'+istr+'AddVariable'+'1']);
-	addButton.onclick = function() {addFreeResponseVariable(istr,textField,addButton);};
 	
 	var answerContainer = createEl('div',['className',' freeResponseAnswerContainerEditor','id','freeResponseAnswerContainerEditor'+istr]);
 	var text1 = document.createTextNode('Answer form (in terms of "var1", "var2", etc):');

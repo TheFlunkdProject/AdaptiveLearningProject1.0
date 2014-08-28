@@ -18,6 +18,7 @@ function insertInnerBox(innerBox) {
 	innerBoxMain.appendChild(controlBar);
 	innerBoxMain.appendChild(innerBoxBody);
 	insertNodeAtCursor(innerBoxMain);
+	applyJS.innerBoxEditor(innerBox, istr);
 
 	//To keep typing after the innerBox is inserted: (it turns out that divs are the lines in contentEditable.)
 	//insertSpaceAroundBox(innerBoxMain);
@@ -47,7 +48,6 @@ function createInnerBoxControlBar(innerBox,istr) {
 	
 	//icons for navigation (just the trash icon right now):
 	var navIconRight = createEl('div',['className',' navIconRight','id',innerBox+'IconTrash'+istr]);
-	navIconRight.onclick=function() {closeInnerBox(istr,innerBox);};
 	var iconImage = createEl('img',['className',' iconImage','src',"/1images/trashIcon.png",'id',innerBox+"TrashIcon"+istr]);
 	appendNextElementsInList([navIconRight,iconImage, controlBar,navIconRight]);
 	
@@ -85,7 +85,7 @@ function createVideoBoxBody(istr) {
 	var input1 = createEl('input',['type','text','className',' videoUrlInput','placeHolder',"Video URL",'id','videoUrlInput'+istr]);
 	var input2 = createEl('input',['type','button','className',' videoUrlButton','id','videoUrlButton'+istr,'value','Apply URL']);
 	var hiddenInput1 = createEl('input',['type','hidden','className','videoCaptionEditor','id','videoCaptionEditor'+istr]);
-	input2.onclick = function() {applyUrl(istr);};
+	
 	//Video start and end times:
 	var div9 = createEl('div',['className',' videoTimeInputsContainer','id','videoTimeInputsContainer'+istr]);
 	var text1=document.createTextNode('Start time:');
@@ -93,7 +93,6 @@ function createVideoBoxBody(istr) {
 	var input3 = createEl('input',['type','text','className',' videoStartTimeInput','id','videoStartTimeInput'+istr,'placeHolder',"hh:mm:ss"]);
 	var input4 = createEl('input',['type','text','className',' videoEndTimeInput','id','videoEndTimeInput'+istr,'placeHolder',"hh:mm:ss"]);
 	var input5 = createEl('input',['type','button','className',' videoTimesButton','id','videoTimesButton'+istr,'value','Apply times']);
-	input5.onclick = function() {applyVideoTimes(istr);};
 
 	//Assemble the DOM branch:
 	appendNextElementsInList([div7,iframe1, div8,[input1,input2], div9,[text1,input3,text2,input4,input5], 
@@ -220,60 +219,67 @@ function createImageBoxBody(istr) {
 	var div8 = createEl('div',['className',' imageOptionsContainer','id',' imageBoxImageOptionsContainer'+istr]);
 	var input1 = createEl('input',['type','button','className',' createNewImageButton','id','imageBoxCreateNewImageButton'+istr,
 			'value','Create New Image']);
-	var input2 = createEl('input',['type','button','className',' loadImageButton','id',' imageBoxLoadImageButton'+istr,
+	
+	var input2 = createEl('input',['type','button','className',' loadImageButton','id','imageBoxLoadImageButton'+istr,
 			'value',"Load Image/Graph"]);
-	input2.onclick = function() {showElement('imageBoxImageUploadBox'+istr);};
-	var input3 = createEl('input',['type','text','className',' searchImageInput','id','imageBoxSearchImageInput',
+	
+	var divList = createEl('div',['className','imageListContainer','id','imageListContainer'+istr,'tabindex','-1']);
+	var input3 = createEl('input',['type','text','className',' searchImageInput','id','imageBoxSearchImageInput'+istr,
 			'placeHolder',"Search Image Library"]);
+	
 	var br1=document.createElement('br');
-	var input4 = createEl('input',['type','radio','className',' searchImagesByNameRadio','id','imageBoxSearchImagesByNameRadio'+istr,
-			'name','searchByRadio'+istr,'value',"Search by image name"]);
-	var text2=document.createTextNode('Search by image name');
-	var br2=document.createElement('br');
-	var input5 = createEl('input',['type','radio','className',' searchImagesByDescriptionRadio','id','imageBoxSearchImagesByDescriptionRadio'+istr,
-			'name','searchByRadio'+istr,'value',"Search by image description"]);
-	var text3=document.createTextNode('Search by image description');
 	var br3=document.createElement('br');
 	var input6 = createEl('input',['type','button','className',' editSelectedImage','id','imageBoxEditSelectedImage'+istr,
 			'value',"Edit Selected Image"]);
+	
 	var div9 = createEl('div',['className',' imagePlaceOptions','id',' imageBoxImagePlaceOptions'+istr]);
 	var input7 = createEl('textarea',['className',' imageCaptionInput','id','imageBoxImageCaptionInput'+istr,'placeHolder',"Image Caption"]);
+	var br17 = createEl('br',[]);
 	var text4=document.createTextNode('Image Placement:');
 	var input8 = createEl('input',['type','radio','className',' imagePlacementCenterRadio','id','imageBoxImagePlacementCenterRadio'+istr,
 			'name','imagePlacementRadio'+istr,'value',"imagePositionCenter"]);
-	input8.onclick=function() {
-		updateImagePosition('imageBoxImagePlacementCenterRadio'+istr,'imageBoxPreviewImageEditor'+istr);
-	};
+	
 	var text5=document.createTextNode('Center');
 	var input9 = createEl('input',['type','radio','className',' imagePlacementRightRadio','id','imageBoxImagePlacementRightRadio'+istr,
 			'name','imagePlacementRadio'+istr,'value',"imagePositionRight",'checked','true']);
-	input9.onclick=function() {
-		updateImagePosition('imageBoxImagePlacementCenterRadio'+istr,'imageBoxPreviewImageEditor'+istr);//Since there are only 2 options
-	};
+	
 	var text6=document.createTextNode('Right');
 	// Create the box/window that pops up when a user wants to upload an image:
-	var form2 = createEl('form',['name','theForm','id','theForm','action','servlet3.jsp','method','post','enctype','multipart/form-data']);
-	form2.onsubmit = function(event) {event.preventDefault();alert('submitted');uploadingStatus(istr)};
+	var form2 = createEl('form',['name','uploadImageForm','id','uploadImageForm'+istr,
+			'action','servlet3.php','method','post','enctype','multipart/form-data']);
+	
 	var div10=createEl('div',['className','imageUploadBox','id','imageBoxImageUploadBox'+istr]);
 	var div14=createEl('div',['className','imageUploadCloseBoxButton','id','imageBoxImageUploadCloseBoxButton'+istr]);
-	div14.onclick=function() {hideElement('imageBoxImageUploadBox'+istr);};
+	
 	var div15=createEl('div',['className','imageUploadCloseBar','id','imageBoxImageUploadCloseBar'+istr]);
 	var div11=createEl('div',['className','imageUploadBoxContents','id','imageBoxImageUploadBoxContents'+istr]);
-	var input10 = createEl('input',['type','file','className','chooseFileButton','id','imageBoxChooseFileButton'+istr,
+	var inputFile = createEl('input',['type','file','className','chooseFileButton','id','imageBoxChooseFileButton'+istr,
 			'name','imageBoxChooseFileButton'+istr]);
-	var input11 = createEl('input',['type','submit','className','uploadFileButton','id','imageBoxUploadFileButton'+istr,
-			'name','imageBoxUploadFileButton'+istr,'value','Upload']);
-	var thingy = createEl('input',['type','text','value','123123123']);
-	//input11.onclick = function() {submitTheForm(istr);};
+	var inputImport = createEl('input',['type','submit','className','uploadFileButton','id','imageBoxUploadFileButton'+istr,
+			'name','imageBoxUploadFileButton'+istr,'value','Import']);
+	
 	var br4 = document.createElement('br');
-	//input11.onclick = function(){thingiverse();};
 	var div12=createEl('div',['className','imageUploadOr','id','imageBoxImageUploadOr'+istr]);
 	var text7=document.createTextNode('or');
-	var input12 = createEl('input',['type','text','className','pasteImageURL','id','imageBoxPasteImageURL'+istr,
+	var inputURL = createEl('input',['type','text','className','pasteImageURL','id','imageBoxPasteImageURL'+istr,
 			'name','imageBoxPasteImageURL'+istr,'placeHolder','Paste Image URL']);
-	var input13 = createEl('input',['type','button','className','saveFileFromURL','id','imageBoxSaveFileFromURL'+istr,
-			'name','imageBoxSaveFileFromURL'+istr,'value','Save']);
-	var br5 = document.createElement('br');
+	var inputClear = createEl('input',['type','button','className','clearFileButton','id','imageBoxClearFileButton'+istr,
+			'name','imageBoxClearFileButton'+istr,'value','Clear']);
+	
+	var inputEdit = createEl('input',['type','button','className','editCurrentImage','id','imageBoxEditCurrentImage'+istr,
+			'name','imageBoxEditCurrentImage'+istr,'value','Edit Image','disabled','true']);
+	
+	var inputImageName = createEl('input',['type','text','className','inputImageName','id','imageBoxInputImageName'+istr,
+			'name','imageBoxInputImageName'+istr,'placeHolder','Image Name']);
+	var brImageName = document.createElement('br');
+	var inputImageDescription = createEl('textarea',['className','inputImageDescription','id','imageBoxInputImageDescription'+istr,
+			'name','imageBoxInputImageDescription'+istr,'placeHolder','Image Description']);
+	var brImageDescription = document.createElement('br');
+	var inputSave = createEl('input',['type','submit','className','saveFileFromURL','id','imageBoxSaveFileFromURL'+istr,
+			'name','imageBoxSaveFileFromURL'+istr,'value','Save','disabled','true']);
+	
+	var inputTempPath = createEl('input',['type','hidden','className','tempPath','id','imageBoxTempPath'+istr,
+			'name','imageBoxTempPath'+istr]);
 	var div13=createEl('div',['className','uploadGraphExplanation','id','imageBoxUploadedGraphExplanation'+istr]);
 	var howToLoadInGraphs = 'To make graphs, go <a href="http://www.craigsmaths.com/openPlaG/openPlaG.html" target="_blank">here</a>,'+
 		' create your graph, '+
@@ -282,8 +288,10 @@ function createImageBoxBody(istr) {
 	div13.innerHTML = howToLoadInGraphs;
 	
 	//Assemble the DOM branch:
-	appendNextElementsInList([div7,[img5,text1], div8,[input1,input2,input3,br1,input4,text2,br2,input5,text3,br3,input6], 
-			div9,[input7,text4,input8,text5,input9,text6], div12,[text7], div11,[input10,input11,br4,div12,input12,input13,br5,div13], 
+	appendNextElementsInList([div7,[img5,text1], div8,[input1,input2,input3,br1,divList,br3,input6], 
+			div9,[input7,br17,text4,input8,text5,input9,text6], div12,[text7],
+			div11,[inputFile,br4,div12,inputURL,inputClear,inputImport,inputEdit,div13,inputTempPath,inputImageName,brImageName,
+				inputImageDescription,brImageDescription,inputSave], 
 			div15,[div14], div10,[div15,div11], form1,[div7,div8,div9], form2,[div10], div6,[form1,form2]]);
 
 	return div6;

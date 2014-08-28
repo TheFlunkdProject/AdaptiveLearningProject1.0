@@ -1,26 +1,37 @@
 function uploadingStatus(istr) {
 	var chooseFileButton = gEBI('imageBoxChooseFileButton'+istr);
 	var uploadButton = gEBI('imageBoxUploadFileButton'+istr);
-	var theForm = gEBI(theForm);
+	var theForm = gEBI('uploadImageForm'+istr);
+	alert(theForm.action);
+	if (theForm.action.indexOf("servlet4.php") != -1) {
+		saveImage(istr);
+		return;
+	}
+	var imageURL = gEBI('imageBoxPasteImageURL'+istr).value;
 	uploadButton.value = 'Uploading...';
 	
 	var files = chooseFileButton.files;
 	var formData = new FormData(theForm);//theForm
-	//formData.append('football', 'season2');
-	for (var i = 0; i < files.length; i++) {
-		var file = files[i];
-		// Check the file type.
-		if (!file.type.match('image.*')) {
-			continue;
-		}
+	formData.append('theName', 'imageBoxChooseFileButton'+istr);
+	if (!imageURL) {
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i];
+			// Check the file type.
+			if (!file.type.match('image.*')) {
+				continue;
+			}
 
-		// Add the file to the request.
-		formData.append('imageBoxChooseFileButton'+istr, file, file.name);
+			// Add the file to the request.
+			formData.append('imageBoxChooseFileButton'+istr, file, file.name);
+		}
+	}
+	else {
+		formData.append('imageURL',imageURL);
 	}
 	
 	//Set up an AJAX request:
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'servlet3.jsp', true);
+	xhr.open('POST', 'servlet3.php', true);
 	//xhr.setRequestHeader("Content-type", "multipart/form-data");
 	
 	// Set up a handler for when the request finishes.
@@ -28,9 +39,94 @@ function uploadingStatus(istr) {
 		if (xhr.status === 200) {
 			// File(s) uploaded.
 			uploadButton.value = 'Upload';
+			
+			var jsonObj = JSON.parse(xhr.responseText);
+			
+			if (jsonObj.StoredPath) {
+				gEBI('imageBoxEditCurrentImage'+istr).disabled = false;
+			}
+			if (jsonObj.errorMessage) {
+				alert(jsonObj.errorMessage);
+				alert(jsonObj.imageType + ' ' + jsonObj.fileSize);
+				hideElement(gEBI('imageBoxInputImageName'+istr));
+				hideElement(gEBI('imageBoxInputImageDescription'+istr));
+				gEBI('imageBoxSaveFileFromURL'+istr).disabled = true;
+			} else {
+				alert(jsonObj.imageType + ' ' + jsonObj.fileSize);
+				var tempPath = jsonObj.StoredPath;
+				if (tempPath == 'url') {
+					gEBI('imageBoxTempPath'+istr).value = imageURL;
+					gEBI('imageBoxPreviewImageEditor'+istr).src = "";
+					gEBI('imageBoxPreviewImageEditor'+istr).src = imageURL;
+					editImage(imageURL);
+					
+					hideElement(gEBI('imageBoxInputImageName'+istr));
+					hideElement(gEBI('imageBoxInputImageDescription'+istr));
+					gEBI('imageBoxSaveFileFromURL'+istr).disabled = true;
+				} else {
+					gEBI('imageBoxTempPath'+istr).value = tempPath;
+					//success.call(null, xhr.responseText);
+					gEBI('imageBoxPreviewImageEditor'+istr).src = "";
+					gEBI('imageBoxPreviewImageEditor'+istr).src = tempPath;
+					
+					showElement(gEBI('imageBoxInputImageName'+istr));
+					showElement(gEBI('imageBoxInputImageDescription'+istr));
+					gEBI('imageBoxSaveFileFromURL'+istr).disabled = false;
+				}
+			}
+		} else {
+			// AJAX didn't work
+			alert('An error occurred!');
+		}
+	};
+	
+	// Send the Data.
+	xhr.send(formData);
+}
+
+function editImage(imgSrc) {
+	var pixlrForm = gEBI('pixlrForm');
+	gEBI("pixlrFormImage").value =  imgSrc;
+	pixlrForm.submit();
+}
+
+function saveImage(istr) {
+	var chooseFileButton = gEBI('imageBoxChooseFileButton'+istr);
+	var saveButton = gEBI('imageBoxSaveFileFromURL'+istr);
+	var theForm = gEBI('uploadImageForm'+istr);
+	var tempPath = gEBI('imageBoxTempPath'+istr).value;
+	var imageName = gEBI('imageBoxInputImageName'+istr).value;
+	var imageDescription = gEBI('imageBoxInputImageDescription'+istr).value;
+	saveButton.value = 'Saving...';
+	
+	var files = chooseFileButton.files;
+	var formData = new FormData(theForm);//theForm
+	formData.append('theName', 'imageBoxChooseFileButton'+istr);
+	formData.append('tempPath', tempPath);
+	formData.append('imageName',imageName);
+	formData.append('imageDescription',imageDescription);
+	
+	//Set up an AJAX request:
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'servlet4.php', true);
+	//xhr.setRequestHeader("Content-type", "multipart/form-data");
+	
+	// Set up a handler for when the request finishes.
+	xhr.onload = function () {
+		if (xhr.status === 200) {
+			// File(s) uploaded.
+			saveButton.value = 'Save';
 			gEBI('pageName').innerHTML = xhr.responseText;
-			//success.call(null, xhr.responseText);
-			gEBI('imageBoxPreviewImageEditor'+istr).src = '/1images/defaultGraph500.png';
+			
+			hideElement(gEBI('imageBoxInputImageName'+istr));
+			hideElement(gEBI('imageBoxInputImageDescription'+istr));
+			
+			gEBI('imageBoxSaveFileFromURL'+istr).disabled = true;
+			
+			var jsonObj = JSON.parse(xhr.responseText);
+			gEBI('pageName').innerHTML = getImagePathFromPID(jsonObj.pid) + tempPath.substring(tempPath.lastIndexOf('.'));
+			gEBI('imageBoxPreviewImageEditor'+istr).src = jsonObj.newURL;
+			//getImagePathFromPID(jsonObj.pid) + tempPath.substring(tempPath.lastIndexOf('.'))
 		} else {
 			alert('An error occurred!');
 		}
@@ -40,8 +136,115 @@ function uploadingStatus(istr) {
 	xhr.send(formData);
 }
 
+function getImagePathFromPID(pid) {
+	var path = '/Images/';
+	path += (parseInt(pid) % 1000).toString();
+	path += '/';
+	path += (parseInt(pid) % 1000000).toString();
+	path += '/';
+	path += pid;
+	return path;
+}
+
+
+function findImage(istr) {
+	
+	var searchImageInputElement = gEBI('imageBoxSearchImageInput'+istr);
+	var searchImageInput = searchImageInputElement.value;
+	var theForm = gEBI('imageBoxImageForm'+istr);
+	
+	var formData = new FormData(theForm);
+	formData.append('query', searchImageInput);
+	
+	//Set up an AJAX request:
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'find-image.php?query=' + searchImageInput, true);
+	//xhr.setRequestHeader("Content-type", "multipart/form-data");
+	
+	// Set up a handler for when the request finishes.
+	xhr.onload = function () {
+		if (xhr.status === 200) {
+			// File(s) uploaded.
+			var imageListContainer = gEBI('imageListContainer'+istr);
+			removeChildren(imageListContainer);
+			
+			//alert(xhr.responseText)
+			var jsonObj = JSON.parse(xhr.responseText);
+			//alert(jsonObj["9"])
+			
+			var i=0;
+			while (jsonObj[i.toString()]) {
+				var listItem = createEl('div',['className','imageListItem','tabindex','-1']);
+				var hiddenSrc = createEl('input',['type','hidden','id',istr+'imageListItem'+i.toString()+'PID',
+					'value',getImagePathFromPID(jsonObj[i.toString()]["PID"]) + jsonObj[i.toString()]["Type"] ]);
+				(function (i) {
+					listItem.onclick = function() {
+						updateImage(i.toString(),istr);
+					};
+				})(i);
+				var listItemText = document.createTextNode(jsonObj[i.toString()]["Name"]);
+				var br1 = createEl('br',[]);
+				var itemDescription = createEl('span',['className','imageListItemDescription','id',istr+'imageListItem'+i.toString()+'Description']);
+				var itemDescriptionText = document.createTextNode(jsonObj[i.toString()]["Description"]);
+				
+				appendNextElementsInList([itemDescription,itemDescriptionText, 
+					listItem,[listItemText,br1,itemDescription,hiddenSrc], 
+					imageListContainer,listItem]);
+				i++;
+			}
+			if (i == 0) {
+				hideElement(imageListContainer);
+			} else {
+				var theChildren = imageListContainer.childNodes;
+				var focusGroup2 = [];
+				for (var n=0; n<theChildren.length; n++) focusGroup2.push(theChildren[n]);
+				focusGroup2.push(imageListContainer);
+				createFocusGroup([searchImageInputElement],focusGroup2);
+				showElement(imageListContainer);
+			}
+			//alert(htmlStr);
+			//getImagePathFromPID(jsonObj.pid) + tempPath.substring(tempPath.lastIndexOf('.'))
+		} else {
+			alert('An error occurred!');
+		}
+	};
+	
+	// Send the Data.
+	xhr.send(formData);
+}
+
+
+function removeChildren(el) {
+	var list = getAllThoseChildren(el);
+	for (var i=0; i<list.length; i++) {
+		list[i].parentNode.removeChild(list[i]);
+	}
+}
+
+
+function updateImage(listNumber,imageBoxNumber) {
+	var newCaption = gEBI(imageBoxNumber+'imageListItem'+listNumber+'Description').innerHTML;
+	var capt = gEBI('imageBoxImageCaptionInput'+imageBoxNumber).value = newCaption;
+	var newSrc = gEBI(imageBoxNumber+'imageListItem'+listNumber+'PID').value;
+	var img = gEBI('imageBoxPreviewImageEditor'+imageBoxNumber);
+	img.src = "";
+	img.src = newSrc;
+}
+
+
+
 function submitTheForm(istr) {
 	gEBI('theForm').submit();
+}
+
+function stopDefAction(evt){
+	evt.preventDefault();
+}
+
+function submitFormWithAction(f,a,event) {
+	f.action = a;
+	f.onsubmit(event);
+	event.preventDefault();
 }
 
 
@@ -111,18 +314,21 @@ function toggleClassOnGroupOffGroup(els1,classnames1,els2,classnames2) {
 }
 	
 function prepClassName(classname) {
-	if (classname.charAt(0) != ' ') classname = ' ' + classname;
+	if (classname && classname.charAt(0) != ' ') classname = ' ' + classname;
 	return classname;
 }
 
 function swapClassName(el,oldClassName,newClassName) {
 	if (typeof el == 'string') el = gEBI(el);
-	if (oldClassName.charAt(0) != ' ') oldClassName = ' '+oldClassName;
-	if (newClassName.charAt(0) != ' ') newClassName = ' '+newClassName;
+	oldClassName = prepClassName(oldClassName);
+	newClassName = prepClassName(newClassName);
+	// First, replace all oldClassName strings with newClassName strings:
 	el.className = replaceAllInstancesOf(el.className,oldClassName,newClassName);
+	// Then, get rid of all newClassName strings:
 	if (el.className.split("newClassName").length - 1 > 1) {
 		el.className = replaceAllInstancesOf(el.className,newClassName,'');
 	}
+	// Now add just one newClassName string:
 	if (el.className.indexOf(newClassName) == -1) el.className += newClassName;
 	
 }
@@ -173,6 +379,24 @@ function gEBI(el) {
 		el = document.getElementById(el);
 	}
 	return el;
+}
+
+function gEBN(n,i) {
+	if (typeof i == 'undefined') i=0;
+	n = document.getElementsByName(n)[i];
+	return(n);
+}
+
+function gEBC(n,i) {
+	if (typeof i == 'undefined') i=0;
+	n = document.getElementsByClassName(n)[i];
+	return(n);
+}
+
+function gEBT(n,i) {
+	if (typeof i == 'undefined') i=0;
+	n = document.getElementsByTagName(n)[i];
+	return(n);
 }
 
 function hhmmssToSeconds(timeInput) {//Takes a string or float and returns a float
@@ -309,7 +533,7 @@ function appendNextElementsInList(args) {//[parent,child/children, etc...
 				args[i].appendChild(args[i+1]); // <- for text nodes; the problem here is that both text nodes and [el,el2] are // objects, and they both have lengths.
 			}
 		} else {
-		args[i].appendChild(args[i+1]);
+			args[i].appendChild(args[i+1]);
 		}
 	}
 }
@@ -332,6 +556,7 @@ function createEl(tagName,args) { //args = [attribute,value, etc...]
 				case 'action':
 				case 'method':
 				case 'enctype':
+				case 'target':
 					el.setAttribute(args[i],str);
 					break;
 				case 'className':
@@ -359,15 +584,68 @@ function createEl(tagName,args) { //args = [attribute,value, etc...]
 				case 'checked':
 					el.checked = stringToBoolean(str);
 					break;
+				case 'disabled':
+					el.disabled = stringToBoolean(str);
+					break;
 					//el.placeHolder = str;
 					//break;
 				case 'onclick':
 					el.onclick = str;
 					break;
+				case 'childNode':
+					el.appendChild(appenders[str]);
+					break;
+				case 'innerHTML':
+					el.innerHTML = str;
+					break;
 			}
 		}
 	}
 	return el;
+}
+
+
+function createEls(tagName,n,args) {
+	var els = [];
+	for (var i=0; i<n; i++) {
+		els.push(createEl(tagName,args));
+	}
+	return els;
+}
+
+
+function createText(str) {
+	return document.createTextNode(str);
+}
+
+
+function createTexts(strs) {
+	var texts = [];
+	if (typeof strs != "string") {
+		for (var i=0; i<strs.length; i++) {
+			texts.push(createText(strs[i]));
+		}
+	} else {
+		texts.push(createText(strs));
+	}
+	return texts;
+}
+
+
+function appendEach(args1, args2) {
+	if (typeof args1 == "string" || typeof args2 == "string") {
+		return "Incorrect inputs";
+	}
+	if (args1.length != args2.length) {
+		return "Input arrays must be the same length";
+	}
+	for (var i=0; i<args1.length; i++) {
+		if (!args2[i].length || args2[i].nodeType == 3) {
+			args1[i].appendChild(args2[i]);
+		} else {
+			appendChildren(args1[i],args2[i]);
+		}
+	}
 }
 
 
@@ -583,16 +861,22 @@ function capitaliseFirstLetter(string) {
 }
 
 
-function hideElement(el) {
+function hideElement(el,toggle) {
 	if (typeof el == 'string') el = gEBI(el);
 	var classname = el.className;
-	switchClassNameOnOff(el,' visibleElement');
+	if (toggle) {
+		switchClassNameOnOff(el,' visibleElement');
+	} else {
+		el.className = replaceAllInstancesOf(classname,' visibleElement','');
+	}
 }
 
 
 function showElement(el) {
 	if (typeof el == 'string') el = gEBI(el);
-	el.className += ' visibleElement';
+	if (el.className.indexOf('visibleElement') == -1) {
+		el.className += ' visibleElement';
+	}
 }
 
 
@@ -628,4 +912,132 @@ function applySigFigs(r,sigFigs) {
 	}
 	return r;
 }
+	
+
+function createFocusGroup(visibleList,invisibleList) {// THEY MUST BE LISTS.
+	for (var i=0; i<visibleList.length; i++) {
+		visibleList[i].onfocus = function() {
+			for (var ii=0; ii<invisibleList.length; ii++) {
+				showElement(invisibleList[ii]);
+			}
+		};
+		setFocusGroupOnblurFunction(visibleList[i],visibleList,invisibleList);
+	}
+	for (var ii=0; ii<invisibleList.length; ii++) {
+		setFocusGroupOnblurFunction(invisibleList[ii],visibleList,invisibleList);
+	}
+}
+
+function setFocusGroupOnblurFunction(el,visibleList,invisibleList) {
+	el.onblur=function() {
+		setTimeout(function() {
+			if (getActiveMembersFromNodeList(visibleList).length > 0 || getActiveMembersFromNodeList(invisibleList).length > 0 ) return;
+			for (var hider=0; hider<invisibleList.length; hider++) {
+				hideElement(invisibleList[hider]);
+			}
+		}, 10);
+	};
+}
+
+function getActiveMembersFromNodeList(list) {
+	var activeNodes = [];
+	for (var i=0; i<list.length; i++) {
+		if (document.activeElement == list[i]) {
+			activeNodes.push(list[i]);
+		}
+	}
+	return activeNodes;
+}
+
+function setCheckOrUncheckFunction(clickElement,checkBoxElement) {
+	clickElement.onclick = function() {
+		if (checkBoxElement.checked) {
+			checkBoxElement.checked = false;
+		} else {
+			checkBoxElement.checked = true;
+		}
+	};
+}
+
+
+function getAllThoseChildren(mainContainerNode) {
+	var descendants = [];
+	var node = mainContainerNode.childNodes[0];
+	if (mainContainerNode.hasChildNodes()){
+	//document.getElementById('pageName').innerHTML = mainContainerNode.childNodes[4].previousSibling.id;
+	}
+	//if (node == null) document.getElementById('pageName').innerHTML = "already null";
+    while(node != null && node.previousSibling != mainContainerNode) {
+        if(node.nodeType == 3 || 1) { /* Fixed a bug here. Thanks @theazureshadow */
+            descendants.push(node);//.nodeValue
+        }
+		
+		//testNumber++;
+		//if (node.id == 'textBox2') document.getElementById('pageName').innerHTML = testNumber.toString();
+		//if (testNumber == 58) document.getElementById('pageName').innerHTML = node.parentNode.id;
+		
+        if(node.hasChildNodes()) {
+			//document.getElementById('pageName').innerHTML = "has a child";
+            node = node.firstChild;
+        }
+        else {
+			
+			//previewText.innerHTML = node.parentNode.innerHTML;
+			if (node == null) node = node.parentNode;
+			
+            while(node.nextSibling == null && node != mainContainerNode) {
+                node = node.parentNode;
+            }
+            node = node.nextSibling;
+        }
+    }
+	return descendants;
+}
+
+function disableIfEmpty(ID,button1) {
+	if (!gEBI(ID).value) {
+		gEBI(button1).disabled=true;
+	} else {
+		gEBI(button1).disabled=false;
+	}
+}
+
+function selectThisListItem(el) {
+	var listContainer = el.parentNode;
+	var siblings = listContainer.childNodes;
+	for (var i=0; i<siblings.length; i++) {
+		swapClassName(siblings[i],'selectedListItem','');
+	}
+	el.className += ' selectedListItem';
+}
+
+
+function getNumberAtStringEnd(str) {
+	var i = str.length;
+	while (!isNaN(str.charAt(i-1))) {
+		i--;
+	}
+	return str.substring(i);
+}
+
+
+function otherString(str, strs) {
+	if (str == strs[0]) {
+		str = strs[1];
+	} else if (str == strs[1]) {
+		str = strs[0];
+	} else {
+		str = "";
+	}
+	return str;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	

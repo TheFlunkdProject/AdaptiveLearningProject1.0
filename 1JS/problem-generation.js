@@ -1,6 +1,6 @@
 function checkMultipleChoiceAnswer(theNumber) {
 	var correctChoice = document.getElementById('multipleChoice'+theNumber+'CorrectAnswer').value;
-	var answerResult = 'Haha stupid';
+	var answerResult = 'Incorrect';
 	var radioGroup = document.getElementsByName('multipleChoiceRadioGroup'+theNumber);
 	var answerDisplay = document.getElementById('multipleChoiceAnswerResultDisplay'+theNumber);
 	

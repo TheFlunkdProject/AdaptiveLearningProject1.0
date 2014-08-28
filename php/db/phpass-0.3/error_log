@@ -1,0 +1,1 @@
+[20-Aug-2014 19:33:58] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/phpass-0.3/test.php on line 24

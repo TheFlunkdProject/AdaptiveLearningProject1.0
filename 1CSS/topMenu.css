@@ -290,7 +290,29 @@
 
 }
 
+#menuAccountDiv {
+	position:relative;
+	height:100%;
+	width:6%;
+	float:left;
+	margin:0em 0em 0em 0em;
+	
+
+}
+
 #menuLoginText {
+	position:absolute;
+	width:100%;
+	height:1em;
+	bottom:0;
+	top:0;
+	margin:auto;
+	text-align:center;
+	font-size:1.5em;
+
+}
+
+#menuAccountText {
 	position:absolute;
 	width:100%;
 	height:1em;
@@ -308,7 +330,7 @@ a.menu {
 	color:#BBBBBB;
 }
 
-a:hover {
+a.menu:hover {
 	color:#55BBFF;
 }
 

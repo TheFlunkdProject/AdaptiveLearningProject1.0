@@ -21,13 +21,13 @@ a:link, a:visited {
 }
 
 #backgroundTexture {
-	position:absolute;
+	position:fixed;
 	top:0%;
 	left:0%;
 	width:100%;
 	height:100%;
-	background-image:url('/1images/texture.png');
-	background-size:1024px 768px;
+	/* background-image:url('/1images/texture.png');
+	background-size:1024px 768px; */
 	z-index:-995;
 }
 

@@ -18,40 +18,6 @@ function previewLesson() {
 }
 
 
-function getAllThoseChildren(mainContainerNode) {
-	var descendants = [];
-	var node = mainContainerNode.childNodes[0];
-	if (mainContainerNode.hasChildNodes()){
-	//document.getElementById('pageName').innerHTML = mainContainerNode.childNodes[4].previousSibling.id;
-	}
-	//if (node == null) document.getElementById('pageName').innerHTML = "already null";
-    while(node != null && node.previousSibling != mainContainerNode) {
-        if(node.nodeType == 3 || 1) { /* Fixed a bug here. Thanks @theazureshadow */
-            descendants.push(node);//.nodeValue
-        }
-		
-		//testNumber++;
-		//if (node.id == 'textBox2') document.getElementById('pageName').innerHTML = testNumber.toString();
-		//if (testNumber == 58) document.getElementById('pageName').innerHTML = node.parentNode.id;
-		
-        if(node.hasChildNodes()) {
-			//document.getElementById('pageName').innerHTML = "has a child";
-            node = node.firstChild;
-        }
-        else {
-			
-			//previewText.innerHTML = node.parentNode.innerHTML;
-			if (node == null) node = node.parentNode;
-			
-            while(node.nextSibling == null && node != mainContainerNode) {
-                node = node.parentNode;
-            }
-            node = node.nextSibling;
-        }
-    }
-	return descendants;
-}
-
 
 
 function dumpNodes(descendants) {
@@ -110,7 +76,8 @@ function dumpNodes(descendants) {
 				var theNumber = descendants[i].id.substring(17);
 				var args = extractContentsFromElements(descendants[i],['triggerTextEditor',2,'hiddenTextBoxEditor',2]);
 				htmlString += '<span class="triggerText" id="triggerText'+theNumber+
-							'" onclick="switchClassNameOnOff(\'hiddenTextBox'+theNumber+'\',\'hiddenTextBoxRevealed\');">';
+							'" onclick="switchClassNameOnOff([\'hiddenTextBox'+theNumber+'\',\'hiddenTextBoxRevealed\',\
+							this.id,\'triggerTextActive\']);">';
 				htmlString += args[1];
 				htmlString += '</span><span class="hiddenTextBox" id="hiddenTextBox'+theNumber+'">';
 				htmlString += args[2];
@@ -125,6 +92,15 @@ function dumpNodes(descendants) {
 				var newDescendants = getAllThoseChildren(descendants[i]);
 				i += newDescendants.length;
 				continue;
+			}
+			// Text areas (filled with HTML):
+			if (descendants[i].id.indexOf('htmlTextarea') != -1) {
+				var dummySpan = createEl('span',[]);
+				gEBI('editingSpace').appendChild(dummySpan);
+				dummySpan.innerHTML = descendants[i].value;
+				dumpNodes(getAllThoseChildren(dummySpan));
+				dummySpan.innerHTML = '';
+				dummySpan.parentNode.removeChild(dummySpan);
 			}
 			// Multiple Choice Boxes
 			if (descendants[i].id.indexOf('multipleChoiceBox') != -1) {

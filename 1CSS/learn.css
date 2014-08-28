@@ -1,0 +1,508 @@
+body {
+	margin:0;
+	font-size:62.5%;
+	font-family:sans-serif;
+	letter-spacing:1px;
+	
+}
+
+a:link,visited {
+	color:#3366FF;
+}
+
+#background {
+	position:absolute;
+	width:100%;
+	height:150em;
+	background-color:#111122;
+	z-index:-999;
+}
+
+#backgroundTexture {
+	position:absolute;
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+	background-image:url('/1images/texture.png');
+	background-size:1024px 768px;
+	z-index:-995;
+}
+
+#mainContainer {
+	position:absolute;
+	width:800px;
+	height:120em;
+	margin-left:auto;
+	margin-right:auto;
+	left:0;
+	right:0;
+	top:6em;
+	
+	text-align:center;
+	
+	/*border:1px solid black;*/
+	
+	
+}
+
+#pageTitleBox {
+	position:relative;
+	width:20em;
+	height:12.4em;
+	float:right;
+	margin-top:2em;
+	margin-right:1em;
+	z-index:5;
+	
+	background-color:#F2FFD2;
+	color:#112233;
+	font-size:1.5em;
+	
+	border-radius:20px;
+}
+
+#pageTitleBoxHeaderContainer {
+	position:relative;
+	width:100%;
+	height:3em;
+	
+	font-size:1.33em;
+	
+}
+
+#pageTitleBoxHeader {
+	position:absolute;
+	width:100%;
+	height:1em;
+	top:1em;
+	
+	text-align:center;
+}
+
+#pageQuote {
+	position:relative;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	margin:1.5em;
+	margin-top:0em;
+}
+
+#pageName {
+	position:relative;
+	width:100%;
+	height:1em;
+	z-index:10;
+	margin-top:.7em;
+	
+	color:#F4F4F4;
+	font-family: Copperplate Gothic Light;
+	font-size:6em;
+	font-weight:500;
+	text-align:center;
+	/*border:1px solid black;*/
+}
+
+#searchRelativeBlock {
+	position:relative;
+	width:100%;
+	height:1.5em;
+	z-index:10;
+	margin-top:2em;
+	
+	font-size:2em;
+	text-align:center;
+	/*border:1px solid black;*/
+}
+
+#searchAbsoluteBlock {
+	position:absolute;
+	height:100%;
+	width:21.75em;
+	margin:auto;
+	left:0;
+	right:0;
+}
+
+#mainSearchInput {
+	width:18em;
+	height:94%;
+	float:left;
+	font-size:1em;
+	margin-left:.75em;
+	padding-left:.5em;
+	
+	border:1px solid #AAAAAA;
+	border-radius:10px;
+}
+
+#mainSearchButton {
+	position:relative;
+	height:100%;
+	width:1.7em;
+	float:right;
+	background-color:#BBBBBB;
+	
+	border:1px solid #AAAAAA;
+	border-radius:10px;
+	
+}
+
+
+
+#availableCourses {
+	position:relative;
+	width:100%;
+	height:1em;
+	z-index:10;
+	margin-top:3em;
+	
+	color:#EEEEEE;
+	font-size:2em;
+	font-weight:500;
+	text-align:center;
+	/*border:1px solid black;*/
+}
+
+#courseBoxesContainer {
+	position:relative;
+	width:100%;
+	height:auto;
+	overflow:auto;
+}
+
+.courseBoxContainer {
+	width:30%;
+	height:27em;
+	float:left;
+	margin-left:1.67%;
+	margin-right:1.66%;
+	margin-top:3em;
+	
+	/*border:1px solid black;*/
+}
+
+.greenCourseBox {
+	position:relative;
+	width:100%;
+	height:22em;
+	border-radius:20px;
+	overflow:hidden;
+	
+	background-color:#225B1A;
+	box-shadow: 0px 1px 5px #000000;
+	
+	/*44BB33*/
+}
+
+.redCourseBox {
+	position:relative;
+	width:100%;
+	height:22em;
+	border-radius:20px;
+	overflow:hidden;
+	
+	background-color:#660810;
+	box-shadow: 0px 1px 5px #000000;
+}
+
+.courseDetailsContainer {
+	position:absolute;
+	top:1em;
+	bottom:1em;
+	left:1em;
+	right:1em;
+	
+	z-index:20;
+	
+	color:#F4F4F4;
+	font-size:1.5em;
+	letter-spacing:2px;
+	font-family:Copperplate Gothic Light;
+}
+
+.boxGlass {
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	z-index:16;
+}
+
+.boxImageHidden {
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	z-index:22;
+	
+	opacity:0;
+	transition:opacity .25s;
+}
+	
+
+.boxTexture {
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	z-index:18;
+}
+
+.courseTitleHeader {
+	position:relavive;
+	width:100%;
+	height:auto;
+	
+	text-align:center;
+	font-size:1.5em;
+	z-index:16;
+}
+
+.courseImage {
+	position:absolute;
+	width:100%;
+	height:9em;
+	bottom:0em;
+}
+
+.coursePostInfo {
+	position:relative;
+	width:100%;
+	height:1.5em;
+	margin-top:1em;
+	
+	color:#F4F4F4;
+	font-size:2em;
+	font-weight:500;
+	text-align:center;
+	opacity:.1;
+	
+}
+
+#requestNewCourse {
+	position:relative;
+	width:100%;
+	height:22em;
+	border-radius:20px;
+	overflow:hidden;
+	
+	cursor:pointer;
+	
+	/*44BB33*/
+}
+
+#requestCourseDetailsContainer {
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	/*top:1em;			this is taken care of by the thick border.
+	bottom:1em;
+	left:1em;
+	right:1em;*/
+	border:1em solid #F4F4F4;
+	border-radius:20px;
+	
+	z-index:20;
+	
+	opacity:.3;
+	color:#F4F4F4;
+	font-size:1.5em;
+	letter-spacing:2px;
+	padding:.5em;
+	font-family:Copperplate Gothic Light;
+}
+
+#plusContainer {
+	position:relative;
+	width:100%;
+	height:9em;
+}
+
+#horizontalLine {
+	position:absolute;
+	height:0;
+	width:38%;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	
+	border:.5em solid #F4F4F4;
+	border-radius:10px;
+}
+
+#verticalLine {
+	position:absolute;
+	height:50%;
+	width:0;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	
+	border:.5em solid #F4F4F4;
+	border-radius:10px;
+}
+
+#inputRequestedCourseBox {
+	position:absolute;
+	width:16em;
+	height:3.75em;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	border-radius:20px;
+	
+	visibility:hidden;
+	padding:.5em;
+	background-color:#F2FFD2;
+	color:#112233;
+	font-size:2.5em;
+	color:#112233;
+	text-align:center;
+
+	z-index:-10;
+}
+	
+
+#floatSpacerRectangle {
+	position:relative;
+	height:25em;
+	width:100%;
+	margin-top:10em;
+	
+	/*border:1px solid black;*/
+}
+
+.emptySpacer4 {
+	margin:4em 0 0 0;
+}
+
+.horizontalLine {
+	position:relative;
+	width:800px;
+	clear:both;
+	height:5px;
+	background-color:#CCCCCC;
+	opacity:.3;
+}
+
+.relativeDiv {
+	position:relative;
+}
+
+#createAccountContainer {
+	position:absolute;
+	height:99%;
+	width:27em;
+	left:0;
+	right:0;
+	margin:auto;
+	
+	color:#F4F4F4;
+	font-size:2em;
+	font-weight:500;
+	text-align:center;
+	
+	/*border:1px solid black;*/
+}
+
+#usernameInput {
+	width:30%;
+	height:1.33em;
+	font-size:.75em;
+	padding-left:.5em;
+	
+	border:1px solid #AAAAAA;
+}
+
+#passwordInput {
+	width:40%;
+	height:1.33em;
+	font-size:.75em;
+	margin-top:.75em;
+	padding-left:.5em;
+	
+	border:1px solid #AAAAAA;
+}
+
+#loginButtonsContainer {
+	position:absolute;
+	height:2.5em;
+	width:19em;
+	margin:auto;
+	left:0;
+	right:0;
+	margin-top:1.25em;
+	
+	
+}
+
+.mainButton {
+	position:relative;
+	height:100%;
+	overflow:hidden;
+	
+	background-color:#44BB33;
+	border-radius:20px;
+	z-index:10;
+}
+
+.buttonText {
+	position:absolute;
+	width:100%;
+	height:50%;
+	top:18%;
+	color:#183348;
+	font-size:1.25em;
+	font-weight:500;
+	text-align:center;
+	z-index:300;
+}
+
+.buttonExplosion {
+	position:absolute;
+	height:9em;
+	top:-3em;
+	
+	visibility:hidden;
+	z-index:0;
+}
+
+#loginButton {
+	width:7em;
+	float:left;
+}
+
+#newAccountButton {
+	width:11em;
+	float:right;
+}
+
+#inspirationContainer {
+	position:absolute;
+	width:26em;
+	height:99%;
+	left:0;
+	right:0;
+	margin:auto;
+	
+	color:#F4F4F4;
+	font-size:2em;
+	font-weight:500;
+	text-align:center;
+	
+	/*border:1px solid black;*/
+}

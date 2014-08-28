@@ -26,6 +26,75 @@ function divUp(istr,box) {
 	}
 }
 
+function htmlEdit(istr,boxType) {
+	var textField = gEBI('textField'+istr);
+	var htmlTextarea = gEBI('htmlTextarea'+istr);
+	if (htmlTextarea.className.indexOf('squishedElement') == -1) {
+		htmlTextarea.className += ' squishedElement';
+		textField.className = replaceAllInstancesOf(textField.className, ' squishedElement','');
+		var htmlRegex = />\{([^\}]*)(value|checked)=([^\}]*)\}/gi;
+		var newHTML = htmlTextarea.value.replace(htmlRegex,' $2="$3">');
+		var htmlRegex = /\n</g;
+		newHTML = newHTML.replace(htmlRegex,'<');
+		textField.innerHTML = newHTML;
+		htmlTextarea.value = '';
+		applyAllJS(textField);
+		textField.focus();
+	} else {
+		textField.className += ' squishedElement';
+		htmlTextarea.className = replaceAllInstancesOf(htmlTextarea.className, ' squishedElement','');
+		var equationPreviews = textField.getElementsByClassName('equationPreview');
+		var inputs = textField.getElementsByTagName('input');
+		for (var i=0; i<inputs.length; i++) {
+			switch(inputs[i].type) {
+				case "text":
+					var inputValue = inputs[i].value;
+					inputs[i].removeAttribute('value');
+					var inputID = inputs[i].id;
+					var valueSpan = document.createTextNode('{'+inputID+'Value='+inputValue+'}');
+					inputs[i].parentNode.appendChild(valueSpan);
+					inputs[i].parentNode.insertBefore(valueSpan, inputs[i].nextSibling);
+					break;
+				case "checkbox":
+				case "radio":
+					inputs[i].removeAttribute('checked');
+					var inputValue = inputs[i].checked;
+					if(inputValue) {
+						//inputs[i].removeAttribute('checked');
+						var inputID = inputs[i].id;
+						var valueSpan = document.createTextNode('{'+inputID+'Checked='+inputValue+'}');
+						inputs[i].parentNode.appendChild(valueSpan);
+						inputs[i].parentNode.insertBefore(valueSpan, inputs[i].nextSibling);
+					}
+					break;
+					
+			}
+		}
+		var textareas = textField.getElementsByTagName('textarea');
+		for (var i=0; i<textareas.length; i++) {
+			var textareaValue = textareas[i].value;
+			if (textareaValue) {
+				//textareas[i].removeAttribute('value');
+				//var textareaID = textareas[i].id;
+				//var valueText = document.createTextNode('{'+textareaID+'Value='+textareaValue+'}');
+				var valueText = document.createTextNode(textareaValue);
+				textareas[i].appendChild(valueText);
+				alert(valueText.parentNode.tagName);
+			}
+		}
+		for (var i=0; i<equationPreviews.length; i++) {
+			equationPreviews[i].innerHTML = '';
+		}
+		htmlTextarea.value = textField.innerHTML;
+		var htmlRegex = /</g;
+		htmlTextarea.value = htmlTextarea.value.replace(htmlRegex,'\n<');
+		textField.value = '';
+		htmlTextarea.focus();
+	}
+		
+	
+}
+
 function closeBox(istr,textBox) {
 	var e=document.getElementById(textBox+istr);
 	var e2=document.getElementById('editingSpace');

@@ -1,0 +1,28 @@
+[18-Aug-2014 15:37:29] PHP Parse error:  syntax error, unexpected '[' in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/validate-login.php on line 62
+[18-Aug-2014 15:37:53] PHP Parse error:  syntax error, unexpected '[' in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/validate-login.php on line 62
+[18-Aug-2014 15:38:16] PHP Parse error:  syntax error, unexpected '[' in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/validate-login.php on line 62
+[18-Aug-2014 17:56:22] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:24] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:26] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:27] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:28] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:28] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:37] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 6
+[18-Aug-2014 17:56:51] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 5
+[18-Aug-2014 17:56:58] PHP Warning:  session_destroy() [<a href='function.session-destroy'>function.session-destroy</a>]: Trying to destroy uninitialized session in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 5
+[18-Aug-2014 17:58:24] PHP Fatal error:  Call to undefined function session_status() in /home/learnfla/public_html/switchlearn.com/ROOT/php/users/logout.php on line 7
+[20-Aug-2014 18:27:09] PHP Fatal error:  Call to undefined function password_hash() in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 38
+[20-Aug-2014 18:27:29] PHP Fatal error:  Call to undefined function password_hash() in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 38
+[20-Aug-2014 18:27:40] PHP Fatal error:  Call to undefined function password_hash() in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 38
+[20-Aug-2014 19:26:36] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 21
+[20-Aug-2014 19:28:08] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 21
+[20-Aug-2014 19:28:30] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 21
+[20-Aug-2014 19:29:15] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 22
+[20-Aug-2014 19:29:48] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 23
+[20-Aug-2014 19:30:44] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 23
+[20-Aug-2014 19:36:51] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 23
+[20-Aug-2014 19:40:42] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 23
+[20-Aug-2014 19:45:04] PHP Fatal error:  Call to a member function CheckPassword() on a non-object in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/verify-user.php on line 23
+[21-Aug-2014 00:27:58] PHP Warning:  mysql_error(): supplied argument is not a valid MySQL-Link resource in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 49
+[21-Aug-2014 00:30:35] PHP Warning:  mysql_errno(): supplied argument is not a valid MySQL-Link resource in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 49
+[21-Aug-2014 00:38:23] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/learnfla/public_html/switchlearn.com/ROOT/php/db/register-new-user.php on line 43
